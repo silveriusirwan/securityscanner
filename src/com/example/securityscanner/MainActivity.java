@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 		
 		data = new ArrayList<String>();
 		
-		
+		data.add("NFC Status");
 		NfcAdapter nfcAdpt = NfcAdapter.getDefaultAdapter(this.getApplicationContext());	
 		if(nfcAdpt!=null)
 		{
@@ -79,12 +79,19 @@ public class MainActivity extends Activity {
 		if(nfcAdpt.isEnabled())
 			{
 				nfcStatus.setText("NFC status = true");
+				data.add("true");
 			}
 			else
 			{
 				nfcStatus.setText("NFC status = false");
+				data.add("true");
 			}
-		} else nfcStatus.setText("NFC status = no NFC adapter");
+		} else {
+			nfcStatus.setText("NFC status = no NFC adapter");
+			data.add("none");
+		}
+		
+		
 		
 		boolean rootstatus2 = isRooted();
 		rootStatus.setText("Root status= "+String.valueOf(rootstatus2));
@@ -216,7 +223,7 @@ public class MainActivity extends Activity {
 			dataApplication.add(marketName); 
 			dataApplication.add(appName);
 		}
-
+		writeCSV(data);
 		writeWifiCSV(dataWifi);
 		writeMarketCSV(dataApplication);
 	}
